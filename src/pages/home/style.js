@@ -10,30 +10,62 @@ export default StyleSheet.create({
         flexDirection: "row",
         gap: 10,
         justifyContent: "space-around",
-        padding: 10,
+        paddingTop: 10,
     },
 
     botao: {
-        backgroundColor: "#Ff3fff",
-        borderColor: "black",
-        borderRadius: 10,
-        padding: 10,
+        backgroundColor: "#fff",
+        borderColor: "#66E4D6",
+        borderWidth: 5,
+        borderRadius: 15,
+        padding: 2,
         width: 150,
         height: 90,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
         shadowColor: "#000",
-        shadowOffset: { width: 0, height: 2},
+        shadowOffset: { width: 0, height: 3},
         shadowOpacity: 0.25,
         borderRadius: 5,
         elevation: 5,
     },
 
     botaoM: {
-        backgroundColor: "#Ff3fff",
-        borderColor: "black",
-        borderRadius: 10,
-        padding: 10,
+        backgroundColor: "#fff",
+        borderColor: "#66E4D6",
+        borderWidth: 5,
+        borderRadius: 15,
+        padding: 2,
         width: 150,
-        height: 180,
+        height: 190,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 3},
+        shadowOpacity: 0.25,
+        borderRadius: 5,
+        elevation: 5,
+    },
+
+    botaoText: {
+        textAlign: 'center',
+        marginBottom: 8,
+        fontWeight: 'bold',
+        color: '#003333',
+    },
+
+    botaoPressed: {
+        transform: [{ scale: 0.96 }],
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.12,
+        elevation: 2,
+    },
+
+    botaoMPressed: {
+        transform: [{ scale: 0.96 }],
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.12,
+        elevation: 2,
     },
 
     v2: {
@@ -41,7 +73,6 @@ export default StyleSheet.create({
         flexDirection: "row",
         gap: 10,
         justifyContent: "space-around",
-        padding: 10,
     },
 
     v3: {
@@ -49,7 +80,6 @@ export default StyleSheet.create({
         flexDirection: "row",
         gap: 10,
         justifyContent: "space-around",
-        padding: 10,
     },
 
     v4: {
@@ -57,7 +87,6 @@ export default StyleSheet.create({
         flexDirection: "row",
         gap: 10,
         justifyContent: "space-around",
-        padding: 10,
     },
 
   });

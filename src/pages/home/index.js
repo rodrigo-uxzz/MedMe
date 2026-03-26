@@ -4,32 +4,57 @@ import { useNavigation } from '@react-navigation/native';
 import styles from "./style";
 
 export default function Home() {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
         <View style={styles.v1}> 
-            <Pressable style={styles.botaoM}>1</Pressable>
-            <View style={{gap: 5,}}>
-                <Pressable style={styles.botao}>2</Pressable>
-                <Pressable style={styles.botao}>3</Pressable>
+            <Pressable style={({pressed}) => [styles.botaoM, pressed && styles.botaoMPressed]}>
+              <Text style={styles.botaoText}>Água</Text>
+            </Pressable>
+            <View style={{gap: 15,}}>
+                <Pressable style={({pressed}) => [styles.botao, pressed && styles.botaoPressed]}>
+                  <Text style={styles.botaoText}>Vacinas</Text>
+                </Pressable>
+                <Pressable
+                  style={({pressed}) => [styles.botao, pressed && styles.botaoPressed]}
+                  onPress={() => navigation.navigate('Glicemia')}
+                >
+                  <Text style={styles.botaoText}>Glicemia</Text>
+                </Pressable>
             </View>
 
         </View>
         <View style={styles.v2}>
-            <Pressable style={styles.botao}>1</Pressable>
-            <Pressable style={styles.botao}>2</Pressable>
+            <Pressable style={({pressed}) => [styles.botao, pressed && styles.botaoPressed]}>
+              <Text style={styles.botaoText}>Frutas</Text>
+            </Pressable>
+            <Pressable style={({pressed}) => [styles.botao, pressed && styles.botaoPressed]}>
+              <Text style={styles.botaoText}>Sangue</Text>
+            </Pressable>
 
         </View>
         <View style={styles.v3}>
-            <View style={{gap: 5,}}>
-                <Pressable style={styles.botao}>2</Pressable>
-                <Pressable style={styles.botao}>3</Pressable>
+            <View style={{gap: 15,}}>
+                <Pressable style={({pressed}) => [styles.botao, pressed && styles.botaoPressed]}>
+                  <Text style={styles.botaoText}>Remédios</Text>
+                </Pressable>
+                <Pressable style={({pressed}) => [styles.botao, pressed && styles.botaoPressed]}>
+                  <Text style={styles.botaoText}>Pressão</Text>
+                </Pressable>
             </View>
-            <Pressable style={styles.botaoM}>3</Pressable>
+            <Pressable style={({pressed}) => [styles.botaoM, pressed && styles.botaoMPressed]}>
+              <Text style={styles.botaoText}>Alergias</Text>
+            </Pressable>
 
         </View>
         <View style={styles.v4}>
-            <Pressable style={styles.botao}>1</Pressable>
-            <Pressable style={styles.botao}>2</Pressable>
+            <Pressable style={({pressed}) => [styles.botao, pressed && styles.botaoPressed]}>
+              <Text style={styles.botaoText}>IMC</Text>
+            </Pressable>
+            <Pressable style={({pressed}) => [styles.botao, pressed && styles.botaoPressed]}>
+              <Text style={styles.botaoText}>Emergência</Text>
+            </Pressable>
 
         </View>
       <StatusBar style="auto" />

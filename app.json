@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "MedMe",
-    "slug": "MedMe",
+    "name": "MedMe-home-branch",
+    "slug": "MedMe-home-branch",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
