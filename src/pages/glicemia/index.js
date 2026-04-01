@@ -1,18 +1,60 @@
-import { StatusBar } from 'expo-status-bar';
-import { Text, View, TextInput, Pressable, ScrollView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React from "react";
+import { StatusBar } from "expo-status-bar";
+import { Text, View, TextInput, Pressable, FlatList } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import styles from "./style";
 
 export default function Glicemia() {
   const navigation = useNavigation();
 
-  // Dados para o histórico
-  const dados = [
-    { id: 1, status: 'Pré diabético', cor: '#FDF2B3', data: '18/03/2026', hora: '14h', valor: '120mg/dL' },
-    { id: 2, status: 'Normal', cor: '#B3E5FC', data: '17/03/2026', hora: '21h', valor: '90mg/dL' },
-    { id: 3, status: 'Diabético', cor: '#FF8A80', data: '17/03/2026', hora: '13h', valor: '135mg/dL' },
-    { id: 4, status: 'Normal', cor: '#B3E5FC', data: '16/03/2026', hora: '10h', valor: '85mg/dL' },
-  ];
+  const [dados, setDados] = React.useState([]);
+  const [valor, setValor] = React.useState("");
+
+  function salvarGlicemia(valor) {
+    if (!valor) {
+      alert("Por favor, insira um valor de glicemia.");
+      return;
+    }
+
+    const data = new Date();
+
+    const dia = String(data.getDate());
+    const mes = String(data.getMonth() + 1);
+    const ano = String(data.getFullYear());
+    const horas = String(data.getHours());
+    const minutos = String(data.getMinutes());
+
+    let status = "";
+    let cor = "";  
+
+    const valorNum = parseFloat(valor);
+
+      if (valorNum < 70) {
+        status = "Baixo";
+        cor ="#FF6B6B";
+      }else if (valorNum >= 70 && valorNum < 100) {
+        status = "Normal";
+        cor = "#B3E5FC";    
+      }else if (valorNum >= 100 && valorNum <= 125) {
+        status = "Pré-diabetes";
+        cor = "#FDF2B3";
+      }else {
+        status = "Diabetes";
+        cor = "#FF6B6B";
+      }
+
+    const novoRegistro = {
+      id: Date.now(),
+      valor,
+      status,
+      cor,
+      data: `${dia}/${mes}/${ano}`,
+      hora: `${horas}:${minutos}`,
+      
+    };
+    setDados((prev) => [novoRegistro, ...prev]);
+    setValor("");
+  }
 
   return (
     <View style={styles.container}>
@@ -22,10 +64,15 @@ export default function Glicemia() {
         <View style={styles.cardG}>
           <TextInput
             style={styles.input}
+            value={valor}
+            onChangeText={setValor}
             placeholder="Valor (mg/dL)"
             keyboardType="numeric"
           />
-          <Pressable style={styles.button}>
+          <Pressable
+            onPress={() => salvarGlicemia(valor)}
+            style={styles.button}
+          >
             <Text style={styles.buttonText}>Salvar</Text>
           </Pressable>
         </View>
@@ -35,20 +82,17 @@ export default function Glicemia() {
       <View style={styles.v2}>
         <Text style={styles.tittle}>Histórico</Text>
 
-        <ScrollView 
+        <FlatList
           style={styles.containerScroll}
-          contentContainerStyle={styles.contentScroll} 
+          contentContainerStyle={styles.contentScroll}
           showsVerticalScrollIndicator={false}
-        >
-          {dados.map((item) => (
-            <View key={item.id} style={styles.cardH}>
-              
-              {/* Etiqueta Flutuante */}
+          data={dados}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <View style={styles.cardH}>
               <View style={[styles.tag, { backgroundColor: item.cor }]}>
                 <Text style={styles.textTag}>{item.status}</Text>
               </View>
-
-              {/* Conteúdo do Card */}
               <View style={styles.row}>
                 <View>
                   <Text style={styles.dateText}>{item.data}</Text>
@@ -56,10 +100,9 @@ export default function Glicemia() {
                 </View>
                 <Text style={styles.valueText}>{item.valor}</Text>
               </View>
-
             </View>
-          ))}
-        </ScrollView>
+          )}
+        />
       </View>
 
       <StatusBar style="auto" />

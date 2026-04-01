@@ -2,8 +2,11 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+//rotas
 import Home from './src/pages/home';
 import Glicemia from './src/pages/glicemia';
+import Agua from './src/pages/agua';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +47,13 @@ export default function App() {
               fontSize: 30,
             },
             headerTintColor: '#66E4D6',
+          }}
+        />
+        <Stack.Screen 
+          name="Agua" 
+          component={Agua} 
+          options={{
+            
           }}
         />
         

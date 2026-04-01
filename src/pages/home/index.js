@@ -11,7 +11,7 @@ export default function Home() {
         <View style={styles.v1}> 
             <Pressable 
               style={({pressed}) => [styles.botaoM, pressed && styles.botaoMPressed]}
-              onPress={() => navigation.navigate('Água')}
+              onPress={() => navigation.navigate('Agua')}
             >
               <Text style={styles.botaoText}>Água</Text>
             </Pressable>
