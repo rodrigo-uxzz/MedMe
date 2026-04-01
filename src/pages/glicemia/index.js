@@ -3,6 +3,8 @@ import { StatusBar } from "expo-status-bar";
 import { Text, View, TextInput, Pressable, FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./style";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect } from "react";
 
 export default function Glicemia() {
   const navigation = useNavigation();
@@ -10,51 +12,72 @@ export default function Glicemia() {
   const [dados, setDados] = React.useState([]);
   const [valor, setValor] = React.useState("");
 
-  function salvarGlicemia(valor) {
+  const salvarGlicemia = async (valor) => {
     if (!valor) {
       alert("Por favor, insira um valor de glicemia.");
       return;
     }
-
+  
     const data = new Date();
-
-    const dia = String(data.getDate());
-    const mes = String(data.getMonth() + 1);
-    const ano = String(data.getFullYear());
-    const horas = String(data.getHours());
-    const minutos = String(data.getMinutes());
-
-    let status = "";
-    let cor = "";  
-
-    const valorNum = parseFloat(valor);
-
-      if (valorNum < 70) {
-        status = "Baixo";
-        cor ="#FF6B6B";
-      }else if (valorNum >= 70 && valorNum < 100) {
-        status = "Normal";
-        cor = "#B3E5FC";    
-      }else if (valorNum >= 100 && valorNum <= 125) {
-        status = "Pré-diabetes";
-        cor = "#FDF2B3";
-      }else {
-        status = "Diabetes";
-        cor = "#FF6B6B";
-      }
-
+  
     const novoRegistro = {
       id: Date.now(),
       valor,
-      status,
-      cor,
-      data: `${dia}/${mes}/${ano}`,
-      hora: `${horas}:${minutos}`,
-      
+      status: "",
+      cor: "",
+      data: `${data.getDate()}/${data.getMonth() + 1}/${data.getFullYear()}`,
+      hora: `${data.getHours()}:${data.getMinutes()}`,
     };
-    setDados((prev) => [novoRegistro, ...prev]);
-    setValor("");
-  }
+  
+    const valorNum = parseFloat(valor);
+  
+    if (valorNum < 70) {
+      novoRegistro.status = "Baixo";
+      novoRegistro.cor = "#FF6B6B";
+    } else if (valorNum < 100) {
+      novoRegistro.status = "Normal";
+      novoRegistro.cor = "#B3E5FC";
+    } else if (valorNum <= 125) {
+      novoRegistro.status = "Pré-diabetes";
+      novoRegistro.cor = "#FDF2B3";
+    } else {
+      novoRegistro.status = "Diabetes";
+      novoRegistro.cor = "#FF6B6B";
+    }
+  
+    try {
+      const dadosSalvos = await AsyncStorage.getItem("@registros");
+  
+      let lista = dadosSalvos ? JSON.parse(dadosSalvos) : [];
+  
+      lista.unshift(novoRegistro);
+  
+      await AsyncStorage.setItem("@registros", JSON.stringify(lista));
+  
+      setDados(lista);
+      setValor("");
+  
+    } catch (e) {
+      console.log("Erro:", e);
+    }
+  };
+
+
+  React.useEffect(() => {
+    const carregarDados = async () => {
+      try {
+        const dadosSalvos = await AsyncStorage.getItem("@registros");
+  
+        if (dadosSalvos) {
+          setDados(JSON.parse(dadosSalvos));
+        }
+      } catch (e) {
+        console.log("Erro ao carregar:", e);
+      }
+    };
+  
+    carregarDados();
+  }, []);
 
   return (
     <View style={styles.container}>

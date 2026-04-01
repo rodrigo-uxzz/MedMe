@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './src/pages/home';
 import Glicemia from './src/pages/glicemia';
 import Agua from './src/pages/agua';
+import Frutas from "./src/pages/frutas"
 
 const Stack = createNativeStackNavigator();
 
@@ -56,6 +57,16 @@ export default function App() {
             
           }}
         />
+        <Stack.Screen
+          name="Frutas"
+          component={Frutas}
+          options={{
+            title: "Nutrientes",
+            headerStyle: { backgroundColor: "#66E4D6" },
+            headerTintColor: "#fff",
+          }}
+        />
+
         
       </Stack.Navigator>
       <StatusBar style="auto" />

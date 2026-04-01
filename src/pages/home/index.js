@@ -29,7 +29,10 @@ export default function Home() {
 
         </View>
         <View style={styles.v2}>
-            <Pressable style={({pressed}) => [styles.botao, pressed && styles.botaoPressed]}>
+            <Pressable 
+              style={({pressed}) => [styles.botao, pressed && styles.botaoPressed]}
+              onPress={() => navigation.navigate('Frutas')}  
+            >
               <Text style={styles.botaoText}>Frutas</Text>
             </Pressable>
             <Pressable style={({pressed}) => [styles.botao, pressed && styles.botaoPressed]}>
