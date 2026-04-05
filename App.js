@@ -8,6 +8,7 @@ import Home from './src/pages/home';
 import Glicemia from './src/pages/glicemia';
 import Agua from './src/pages/agua';
 import Frutas from "./src/pages/frutas"
+import Vacinas from "./src/pages/vacinas"
 
 const Stack = createNativeStackNavigator();
 
@@ -61,7 +62,16 @@ export default function App() {
           name="Frutas"
           component={Frutas}
           options={{
-            title: "Nutrientes",
+            title: "Frutas",
+            headerStyle: { backgroundColor: "#66E4D6" },
+            headerTintColor: "#fff",
+          }}
+        />
+        <Stack.Screen
+          name="Vacinas"
+          component={Vacinas}
+          options={{
+            title: "Vacinas",
             headerStyle: { backgroundColor: "#66E4D6" },
             headerTintColor: "#fff",
           }}

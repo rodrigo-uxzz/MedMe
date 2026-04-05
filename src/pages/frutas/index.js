@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Text, View, TextInput, Pressable } from "react-native";
+import axios from "axios";
 import styles from "./style";
 
 const API_KEY = "rMMCeJeKSFOeVeuWDvutZdwxVaLVhz3C9Nv0Idon";
@@ -20,11 +21,17 @@ export default function Frutas() {
     setDados(null);
 
     try {
-      const busca = await fetch(
-        `https://api.nal.usda.gov/fdc/v1/foods/search?query=${alimento}&api_key=${API_KEY}`
+      const busca = await axios.get(
+        `https://api.nal.usda.gov/fdc/v1/foods/search`,
+        {
+          params: {
+            query: alimento,
+            api_key: API_KEY,
+          },
+        },
       );
 
-      const resultadoBusca = await busca.json();
+      const resultadoBusca = busca.data;
 
       if (!resultadoBusca.foods || resultadoBusca.foods.length === 0) {
         setErro("Alimento não encontrado.");
@@ -33,21 +40,28 @@ export default function Frutas() {
 
       const alimentoEncontrado = resultadoBusca.foods[0];
 
-      const detalhe = await fetch(
-        `https://api.nal.usda.gov/fdc/v1/food/${alimentoEncontrado.fdcId}?api_key=${API_KEY}`
+      const detalhe = await axios.get(
+        `https://api.nal.usda.gov/fdc/v1/food/${alimentoEncontrado.fdcId}`,
+        {
+          params: {
+            api_key: API_KEY,
+          },
+        },
       );
 
-      const resultadoDetalhe = await detalhe.json();
+      const resultadoDetalhe = detalhe.data;
 
       const nutrientes = resultadoDetalhe.foodNutrients || [];
 
       const pegar = (nome) => {
         const item = nutrientes.find(
-          (n) => n.nutrient?.name?.toLowerCase() === nome.toLowerCase()
+          (n) => n.nutrient?.name?.toLowerCase() === nome.toLowerCase(),
         );
-        return item
-          ? `${item.amount} ${item.nutrient.unitName}`
-          : "Não informado";
+        if (item) {
+          return `${item.amount} ${item.nutrient.unitName}`;
+        } else {
+          return "Não informado";
+        }
       };
 
       setDados({
@@ -58,7 +72,6 @@ export default function Frutas() {
         gordura: pegar("Total lipid (fat)"),
         fibra: pegar("Fiber, total dietary"),
       });
-
     } catch (e) {
       console.log(e);
       setErro("Erro ao buscar dados.");
@@ -78,51 +91,44 @@ export default function Frutas() {
             placeholder="Ex: banana"
           />
 
-          <Pressable
-            onPress={buscarNutrientes}
-            style={styles.button}
-          >
+          <Pressable onPress={buscarNutrientes} style={styles.button}>
             <Text style={styles.buttonText}>Buscar</Text>
           </Pressable>
         </View>
       </View>
       <View style={styles.v2}>
-        <Text style={styles.tittle}>Resultado</Text>
+        <Text style={styles.tittle}>Nutrientes</Text>
 
         {erro ? <Text>{erro}</Text> : null}
 
-        {dados && (
+        {dados !== null && (
           <View style={styles.cardH}>
-            
             <View style={styles.nutrientesContainer}>
+              <View style={styles.nutrienteBox}>
+                <Text style={styles.nutrienteTitulo}>🔥 Calorias</Text>
+                <Text style={styles.nutrienteValor}>{dados.calorias}</Text>
+              </View>
 
-            <View style={styles.nutrienteBox}>
-              <Text style={styles.nutrienteTitulo}>🔥 Calorias</Text>
-              <Text style={styles.nutrienteValor}>{dados.calorias}</Text>
+              <View style={styles.nutrienteBox}>
+                <Text style={styles.nutrienteTitulo}>💪 Proteína</Text>
+                <Text style={styles.nutrienteValor}>{dados.proteina}</Text>
+              </View>
+
+              <View style={styles.nutrienteBox}>
+                <Text style={styles.nutrienteTitulo}>🍞 Carboidratos</Text>
+                <Text style={styles.nutrienteValor}>{dados.carboidratos}</Text>
+              </View>
+
+              <View style={styles.nutrienteBox}>
+                <Text style={styles.nutrienteTitulo}>🥑 Gordura</Text>
+                <Text style={styles.nutrienteValor}>{dados.gordura}</Text>
+              </View>
+
+              <View style={styles.nutrienteBox}>
+                <Text style={styles.nutrienteTitulo}>🌾 Fibra</Text>
+                <Text style={styles.nutrienteValor}>{dados.fibra}</Text>
+              </View>
             </View>
-
-            <View style={styles.nutrienteBox}>
-              <Text style={styles.nutrienteTitulo}>💪 Proteína</Text>
-              <Text style={styles.nutrienteValor}>{dados.proteina}</Text>
-            </View>
-
-            <View style={styles.nutrienteBox}>
-              <Text style={styles.nutrienteTitulo}>🍞 Carboidratos</Text>
-              <Text style={styles.nutrienteValor}>{dados.carboidratos}</Text>
-            </View>
-
-            <View style={styles.nutrienteBox}>
-              <Text style={styles.nutrienteTitulo}>🥑 Gordura</Text>
-              <Text style={styles.nutrienteValor}>{dados.gordura}</Text>
-            </View>
-
-            <View style={styles.nutrienteBox}>
-              <Text style={styles.nutrienteTitulo}>🌾 Fibra</Text>
-              <Text style={styles.nutrienteValor}>{dados.fibra}</Text>
-            </View>
-
-            </View>
-
           </View>
         )}
       </View>

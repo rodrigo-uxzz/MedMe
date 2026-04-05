@@ -16,7 +16,10 @@ export default function Home() {
               <Text style={styles.botaoText}>Água</Text>
             </Pressable>
             <View style={{gap: 15,}}>
-                <Pressable style={({pressed}) => [styles.botao, pressed && styles.botaoPressed]}>
+                <Pressable 
+                style={({pressed}) => [styles.botao, pressed && styles.botaoPressed]}
+                onPress={()=> navigation.navigate('Vacinas')}
+                >
                   <Text style={styles.botaoText}>Vacinas</Text>
                 </Pressable>
                 <Pressable
