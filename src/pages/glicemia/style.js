@@ -9,7 +9,7 @@ export default StyleSheet.create({
     },
     
     v1: {
-        width: '100%',
+        width: '94%',
         marginBottom: 16,
     },
     
@@ -28,19 +28,20 @@ export default StyleSheet.create({
         borderRadius: 8,
         padding: 30,
         paddingBottom: 50,
-        marginTop: 8,
+        marginTop: 10,
+        margin: 10,
         position: 'relative',
     },
 
     input: {
         width: '100%',
-        height: 44,
+        height: 43,
         borderWidth: 3,
         borderColor: "#66E4D6",
         borderRadius: 8,
         padding: 25,
         fontWeight: '500',
-        fontSize: 25,
+        fontSize: 22,
         color: '#cac6c6',
         paddingHorizontal: 8,
     },
@@ -66,14 +67,14 @@ export default StyleSheet.create({
     v2: {
         flex: 1, 
         paddingHorizontal: 5,
-        paddingTop: 50,
+        paddingTop: 15,
     },
 
     tittle: {
-        fontSize: 24,
+        marginTop :20,
+        fontSize: 26,
         fontWeight: 'bold',
-        color: '#4DD0E1',
-        marginBottom: 20,
+        color: '#66E4D6',
     },
 
     containerScroll: {
@@ -88,10 +89,10 @@ export default StyleSheet.create({
 
     cardH: {
         borderWidth: 3,
-        borderColor: '#4DD0E1',
-        borderRadius: 10,
-        padding: 15,
-        marginBottom: 25,
+        borderColor: '#66E4D6',
+        borderRadius: 15,
+        padding: 12,
+        marginBottom: 20,
         position: 'relative', // Necessário para a tag se posicionar
     },
 

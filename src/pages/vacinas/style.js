@@ -119,7 +119,6 @@ export default StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 5,
   },
 
   dateText: {
@@ -142,7 +141,7 @@ export default StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 8,
-    marginBottom: 15,
+    marginBottom: 8,
     marginTop: 20,
   },
 
@@ -161,6 +160,7 @@ export default StyleSheet.create({
   textoFiltro: {
     color: "#66E4D6",
     fontWeight: "bold",
+    fontSize: 15,
   },
 
   textoAtivo: {

@@ -15,8 +15,9 @@ export default StyleSheet.create({
   tittle: {
     fontSize: 26,
     fontWeight: "bold",
-    color: "#4DD0E1",
+    color: "#66E4D6",
     marginBottom: 15,
+    marginTop: 20,
   },
 
   cardG: {
@@ -58,12 +59,12 @@ export default StyleSheet.create({
   },
 
   v2: {
-    marginTop: 40,
+    marginTop: 15,
   },
 
   cardH: {
     borderWidth: 3,
-    borderColor: "#4DD0E1",
+    borderColor: "#66E4D6",
     borderRadius: 10,
     padding: 20,
   },

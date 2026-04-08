@@ -47,9 +47,10 @@ export default StyleSheet.create({
 
     botaoText: {
         textAlign: 'center',
-        marginBottom: 8,
+        marginBottom: 5,
         fontWeight: 'bold',
-        color: '#003333',
+        fontSize: 20,
+        color: '#66E4D6',
     },
 
     botaoPressed: {
