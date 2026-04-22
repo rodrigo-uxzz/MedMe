@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, Image, Pressable } from 'react-native';
+import { Text, View, Image, Pressable, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from "./style";
 import {MaterialCommunityIcons} from '@expo/vector-icons';
@@ -14,8 +14,12 @@ export default function Home() {
   };
 
   return (
-    <View style={styles.container}>
-        <View style={styles.v1}> 
+    <ScrollView 
+      style={styles.container}
+      contentContainerStyle={{ paddingBottom: 20 }}
+      showsVerticalScrollIndicator={false}
+    >        
+          <View style={styles.v1}> 
             <Pressable 
               style={({pressed}) => [styles.botaoM, pressed && styles.botaoMPressed]}
               onPress={() => navigation.navigate('Agua')}
@@ -84,8 +88,19 @@ export default function Home() {
             </Pressable>
 
         </View>
+        <View style={styles.v5}>
+            <Pressable style={({pressed}) => [styles.botao, pressed && styles.botaoPressed]}>
+              <MaterialCommunityIcons name="scale-bathroom" size={45} color="#66E4D6" />
+              <Text style={styles.botaoText}>Meditação</Text>
+            </Pressable>
+            <Pressable style={({pressed}) => [styles.botao, pressed && styles.botaoPressed]}>
+              <MaterialCommunityIcons name="alert" size={45} color="#66E4D6" />
+              <Text style={styles.botaoText}>Dicas</Text>
+            </Pressable>
+
+        </View>
       <StatusBar style="auto" />
-    </View>
+    </ScrollView>
   );
 }
 

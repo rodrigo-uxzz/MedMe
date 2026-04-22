@@ -6,11 +6,18 @@ export default StyleSheet.create({
     },
 
     v1: {
-        flex:1,
         flexDirection: "row",
         gap: 10,
         justifyContent: "space-around",
         paddingTop: 10,
+        marginBottom: 15,
+    },
+    v3: {
+        flexDirection: "row",
+        gap: 10,
+        justifyContent: "space-around",
+        paddingTop: 10,
+        marginBottom: 15,
     },
 
     botao: {
@@ -72,24 +79,23 @@ export default StyleSheet.create({
     },
 
     v2: {
-        flex:0.5,
         flexDirection: "row",
         gap: 10,
         justifyContent: "space-around",
+        marginBottom: 15,
     },
-
-    v3: {
-        flex:1,
-        flexDirection: "row",
-        gap: 10,
-        justifyContent: "space-around",
-    },
-
     v4: {
-        flex:0.5,
         flexDirection: "row",
         gap: 10,
         justifyContent: "space-around",
+        marginBottom: 15,
     },
+    v5: {
+        flexDirection: "row",
+        gap: 10,
+        justifyContent: "space-around",
+        marginBottom: 15,
+    },
+
 
   });

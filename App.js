@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Splash from './src/pages/Splash';
 import Login from './src/pages/Login';
 import Cadastro from './src/pages/Cadastro';
+import Camera from './src/pages/Camera';
 import Home from './src/pages/home';
 import Glicemia from './src/pages/glicemia';
 import Agua from './src/pages/agua';
@@ -28,6 +29,9 @@ export default function App() {
         <Stack.Screen name="Cadastro" component={Cadastro}
           options={{ headerShown: false,}}
         />
+        <Stack.Screen name="Camera" component={Camera}
+          options={{ headerShown: false,}}
+        />
         <Stack.Screen name="Home" 
 
         component={Home} 
@@ -35,6 +39,11 @@ export default function App() {
           title: "MedMe",
           headerStyle: { backgroundColor: "#66E4D6" },
           headerTintColor: "#fff",
+
+          headerTitleStyle: {
+            fontSize: 26,
+            fontWeight: 'bold',
+          }
           
         }} />
         <Stack.Screen
@@ -44,6 +53,11 @@ export default function App() {
               title: "Glicemia",
               headerStyle: { backgroundColor: "#66E4D6" },
               headerTintColor: "#fff",
+
+              headerTitleStyle: {
+                fontSize: 26,
+                fontWeight: 'bold',
+              }
           }}
         />
         <Stack.Screen 
@@ -53,6 +67,11 @@ export default function App() {
             title: "Água",
             headerStyle: { backgroundColor: "#66E4D6" },
             headerTintColor: "#fff",
+
+            headerTitleStyle: {
+              fontSize: 26,
+              fontWeight: 'bold',
+            }
             
           }}
         />
@@ -63,6 +82,11 @@ export default function App() {
             title: "Frutas",
             headerStyle: { backgroundColor: "#66E4D6" },
             headerTintColor: "#fff",
+
+            headerTitleStyle: {
+              fontSize: 26,
+              fontWeight: 'bold',
+            }
           }}
         />
         <Stack.Screen
@@ -72,6 +96,11 @@ export default function App() {
             title: "Vacinas",
             headerStyle: { backgroundColor: "#66E4D6" },
             headerTintColor: "#fff",
+
+            headerTitleStyle: {
+              fontSize: 26,
+              fontWeight: 'bold',
+            }
           }}
         />
 

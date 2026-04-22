@@ -15,23 +15,36 @@ export default function Cadastro() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
-  const salvarCadastro = async () => {
+  const salvarCadastro = () => {
     if (!nome || !email || !senha) {
-      console.log('Preencha todos os campos');
+      Alert.alert('Preencha todos os campos');
       return;
     }
-    
-    const usuario = { nome, email, senha };
-
-    await AsyncStorage.setItem('@Usuario', JSON.stringify(usuario));
-
-    Alert.alert('Conta criada com sucesso!');
-    navigation.navigate('Login');
-    };
-
-  const voltar = () => {
-    navigation.navigate('Login');
+  
+    navigation.navigate('Camera', {
+      nome,
+      email,
+      senha,
+    });
   };
+
+  // const salvarCadastro = async () => {
+  //   if (!nome || !email || !senha) {
+  //     console.log('Preencha todos os campos');
+  //     return;
+  //   }
+    
+  //   const usuario = { nome, email, senha };
+
+  //   await AsyncStorage.setItem('@Usuario', JSON.stringify(usuario));
+
+  //   Alert.alert('Conta criada com sucesso!');
+  //   navigation.navigate('Login');
+  //   };
+
+  // const voltar = () => {
+  //   navigation.navigate('Login');
+  // };
   return (
     <KeyboardAvoidingView 
       style={{flex: 1,}} 
